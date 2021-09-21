@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
-import Pet from "./pet";
+import Results from "./Results";
+import useBreedList from "./useBreedList";
 
 const ANIMALS = ['cat', 'dog', 'bird', 'reptile', 'rabbit'];
-const BREEDS = [];
 
 const SearchParams = () => {
     const [location, setLocation] = useState("Washington, DC");
     const [animal, setAnimal] = useState("");
     const [breed, setBreed] = useState("");
-    const [pet, setPets] = useState([]);
+    const [pets, setPets] = useState([]);
+    const [breeds] = useBreedList(animal);
 
     useEffect(() => {
         requestPetData()
-    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     async function requestPetData() {
         const requestUrl = `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`;
@@ -20,14 +22,17 @@ const SearchParams = () => {
         // contains a pets property
         const data = await response.json();
 
-        console.log(data);
-
         setPets(data.pets);
     }
 
     return (
         <div className="search-params">
-            <form>
+            <form
+                onSubmit={event => {
+                    event.preventDefault();
+                    requestPetData();
+                }}
+            >
                 <label htmlFor="location">
                     Location
                     <input id="location" onChange={event => setLocation(event.target.value)} value={location} placeholder="Location" />
@@ -60,7 +65,7 @@ const SearchParams = () => {
                     >
                         <option />
                         {
-                            BREEDS.map(breed => (
+                            breeds.map(breed => (
                                 <option value={breed} key={breed}>
                                     {breed}
                                 </option>
@@ -70,6 +75,7 @@ const SearchParams = () => {
                 </label>
                 <button>Submit</button>
             </form>
+            <Results pets={pets} />
         </div>
     )
 };
