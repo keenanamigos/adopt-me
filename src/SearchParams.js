@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Pet from "./pet";
 
 const ANIMALS = ['cat', 'dog', 'bird', 'reptile', 'rabbit'];
 const BREEDS = [];
@@ -7,6 +8,22 @@ const SearchParams = () => {
     const [location, setLocation] = useState("Washington, DC");
     const [animal, setAnimal] = useState("");
     const [breed, setBreed] = useState("");
+    const [pet, setPets] = useState([]);
+
+    useEffect(() => {
+        requestPetData()
+    });
+
+    async function requestPetData() {
+        const requestUrl = `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`;
+        const response = await fetch(requestUrl);
+        // contains a pets property
+        const data = await response.json();
+
+        console.log(data);
+
+        setPets(data.pets);
+    }
 
     return (
         <div className="search-params">
