@@ -1,5 +1,3 @@
-import React from 'react';
-
 // This is WITHOUT JSX
 // const Pet = (props) => {
 //     return React.createElement(
@@ -14,13 +12,27 @@ import React from 'react';
 //     );
 //   };
 
-const Pet = (props) => {
+const Pet = ({
+  name,
+  animal,
+  breed,
+  images,
+  location,
+  id
+}) => {
+  let defaultHeroImage = 'http://pets-images.dev-apis.com/pets/none.jpg'
+  const imageToShow = images && images.length > 0 ? images[0] : defaultHeroImage;
+
   return (
-    <div>
-      <h2>{props.name}</h2>
-      <h3>{props.animal}</h3>
-      <h4>{props.breed}</h4>
-    </div>
+    <a href={`/details/${id}`} className="pet">
+      <div className="image-container">
+        <img src={imageToShow} alt={name} />
+      </div>
+      <div className="info">
+        <h1>{name}</h1>
+        <h2>{`${animal} - ${breed} - ${location}`}</h2>
+      </div>
+    </a>
   )
 }
 

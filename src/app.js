@@ -1,3 +1,4 @@
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import Pet from './Pet';
 import SearchParams from './SearchParams';
@@ -32,4 +33,8 @@ const AdoptionApp = () => {
   );
 };
 
-ReactDOM.render(<AdoptionApp />, document.getElementById("root"));
+ReactDOM.render(
+  <StrictMode>
+    <AdoptionApp />
+  </StrictMode>,
+  document.getElementById("root"));
