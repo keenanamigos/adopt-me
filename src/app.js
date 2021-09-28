@@ -1,6 +1,8 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import Pet from './Pet';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
+import Details from './Details';
 import SearchParams from './SearchParams';
 
 // This is WITHOUT JSX
@@ -24,11 +26,21 @@ import SearchParams from './SearchParams';
 const AdoptionApp = () => {
   return (
     <div>
-      <h1>Adopt Me Please!</h1>
-      <Pet name="Xavier" animal="Cat" breed="Orange Tabby" />
-      <Pet name="Louis" animal="Bird" breed="Parrot" />
-      <Pet name="Jasper" animal="Dog" breed="Husky" />
-      <SearchParams />
+      <Router>
+        <header>
+          <Link to="/">
+            <h1>Adopt Me Please!</h1>
+          </Link>
+        </header>
+        <Switch>
+          <Route path="/details/:id">
+            <Details />
+          </Route>
+          <Route path="/">
+            <SearchParams />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

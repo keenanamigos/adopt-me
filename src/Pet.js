@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 // This is WITHOUT JSX
 // const Pet = (props) => {
 //     return React.createElement(
@@ -24,7 +26,7 @@ const Pet = ({
   const imageToShow = images && images.length > 0 ? images[0] : defaultHeroImage;
 
   return (
-    <a href={`/details/${id}`} className="pet">
+    <Link to={`/details/${id}`} className="pet">
       <div className="image-container">
         <img src={imageToShow} alt={name} />
       </div>
@@ -32,7 +34,7 @@ const Pet = ({
         <h1>{name}</h1>
         <h2>{`${animal} - ${breed} - ${location}`}</h2>
       </div>
-    </a>
+    </Link>
   )
 }
 
