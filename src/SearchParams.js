@@ -38,7 +38,7 @@ const SearchParams = () => {
             >
                 <label className="search-label" htmlFor="location">
                     Location
-                    <input className="w-60" id="location" onChange={event => setLocation(event.target.value)} value={location} placeholder="Location" />
+                    <input className="search-control" id="location" onChange={event => setLocation(event.target.value)} value={location} placeholder="Location" />
                 </label>
                 <label className="search-label" htmlFor="animal">
                     Animal
@@ -62,7 +62,7 @@ const SearchParams = () => {
                 <label className="search-label" htmlFor="breed">
                     Breed
                     <select
-                        className="search-control"
+                        className="search-control disabled:opacity-50"
                         id="breed"
                         value={breed}
                         onChange={event => setBreed(event.target.value)}
@@ -93,7 +93,7 @@ const SearchParams = () => {
                         <option value="red">Red</option>
                     </select>
                 </label>
-                <button className="search-control" style={{ backgroundColor: theme }}>Submit</button>
+                <button className="rounded-px-6 py-2 text-white hover:opacity-50 border-none" style={{ backgroundColor: theme }}>Submit</button>
             </form>
             <Results pets={pets} />
         </div>
