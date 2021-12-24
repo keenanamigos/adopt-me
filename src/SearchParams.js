@@ -36,13 +36,14 @@ const SearchParams = () => {
                     requestPetData();
                 }}
             >
-                <label htmlFor="location">
+                <label className="search-label" htmlFor="location">
                     Location
-                    <input id="location" onChange={event => setLocation(event.target.value)} value={location} placeholder="Location" />
+                    <input className="w-60" id="location" onChange={event => setLocation(event.target.value)} value={location} placeholder="Location" />
                 </label>
-                <label htmlFor="animal">
+                <label className="search-label" htmlFor="animal">
                     Animal
                     <select
+                        className="search-control"
                         id="animal"
                         value={animal}
                         onChange={event => setAnimal(event.target.value)}
@@ -58,9 +59,10 @@ const SearchParams = () => {
                         }
                     </select>
                 </label>
-                <label htmlFor="breed">
+                <label className="search-label" htmlFor="breed">
                     Breed
                     <select
+                        className="search-control"
                         id="breed"
                         value={breed}
                         onChange={event => setBreed(event.target.value)}
@@ -76,9 +78,10 @@ const SearchParams = () => {
                         }
                     </select>
                 </label>
-                <label htmlFor="theme">
+                <label className="search-label" htmlFor="theme">
                     Theme
                     <select
+                        className="search-control"
                         id="theme"
                         value={theme}
                         onChange={ event => setTheme(event.target.value) }
@@ -90,7 +93,7 @@ const SearchParams = () => {
                         <option value="red">Red</option>
                     </select>
                 </label>
-                <button style={{ backgroundColor: theme }}>Submit</button>
+                <button className="search-control" style={{ backgroundColor: theme }}>Submit</button>
             </form>
             <Results pets={pets} />
         </div>
