@@ -26,11 +26,11 @@ const Pet = ({
   const imageToShow = images && images.length > 0 ? images[0] : defaultHeroImage;
 
   return (
-    <Link to={`/details/${id}`} className="pet">
-      <div className="image-container">
+    <Link to={`/details/${id}`} className="relative block">
+      <div>
         <img src={imageToShow} alt={name} />
       </div>
-      <div className="info">
+      <div className="absolute bottom-0 left-0 bg-gradient-to-tr from-white to-transparent pr-2 pt-2">
         <h1>{name}</h1>
         <h2>{`${animal} - ${breed} - ${location}`}</h2>
       </div>
