@@ -1,4 +1,14 @@
+import { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
+
+interface Props {
+  name: string;
+  animal: string;
+  breed: string;
+  images: string[];
+  location: string;
+  id: string;
+}
 
 // This is WITHOUT JSX
 // const Pet = (props) => {
@@ -14,7 +24,7 @@ import { Link } from "react-router-dom";
 //     );
 //   };
 
-const Pet = ({
+const Pet: FunctionComponent<Props> = ({
   name,
   animal,
   breed,
@@ -22,7 +32,7 @@ const Pet = ({
   location,
   id
 }) => {
-  let defaultHeroImage = 'http://pets-images.dev-apis.com/pets/none.jpg'
+  const defaultHeroImage = 'http://pets-images.dev-apis.com/pets/none.jpg'
   const imageToShow = images && images.length > 0 ? images[0] : defaultHeroImage;
 
   return (
