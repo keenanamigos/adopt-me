@@ -1,6 +1,5 @@
 import { StrictMode, useState } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 
 import Details from './Details';
 import SearchParams from './SearchParams';
@@ -28,9 +27,9 @@ const AdoptionApp = () => {
   const theme = useState('green')
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <div>
-        <Router>
+    <StrictMode>
+      <ThemeContext.Provider value={theme}>
+        <div>
           <header>
             <Link to="/">
               <h1>Adopt Me Please!</h1>
@@ -44,14 +43,10 @@ const AdoptionApp = () => {
               <SearchParams />
             </Route>
           </Switch>
-        </Router>
-      </div>
-    </ThemeContext.Provider>
+        </div>
+      </ThemeContext.Provider>
+    </StrictMode>
   );
 };
 
-ReactDOM.render(
-  <StrictMode>
-    <AdoptionApp />
-  </StrictMode>,
-  document.getElementById("root"));
+export default AdoptionApp;
