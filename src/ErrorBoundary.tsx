@@ -1,25 +1,25 @@
-import { Component } from "react";
+import { Component, ErrorInfo, ReactNode } from "react";
 import { Link, Redirect} from "react-router-dom";
 
 class ErrorBoundary extends Component {
     state = { hasError: false, redirect: false };
 
-    static getDerivedStateFromError() {
-        return { hasError: true };
+    static getDerivedStateFromError(): { hasError: boolean, redirect: boolean } {
+        return { hasError: true, redirect: false };
     }
 
-    componentDidCatch(error, info) {
+    componentDidCatch(error: Error, info: ErrorInfo): void {
         // In a Production-level app you can use this method to stream data to your logging services
         console.error("Error caught in the Error Boundary", error, info);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(): void {
         if (this.state.hasError) {
             setTimeout(() => this.setState({ redirect: true }), 5000);
         }
     }
 
-    render() {
+    render(): ReactNode {
         if (this.state.redirect) {
             return <Redirect to="/" />
         } else if (this.state.hasError) {

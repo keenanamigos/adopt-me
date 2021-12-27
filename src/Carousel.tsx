@@ -1,6 +1,11 @@
-import { Component } from "react";
+import { Component, MouseEvent, ReactNode } from "react";
 
-class Carousel extends Component {
+interface Props {
+    images: string[];
+
+}
+
+class Carousel extends Component<Props> {
     state = {
         active: 0
     };
@@ -9,14 +14,20 @@ class Carousel extends Component {
         images: ['http://pets-images.dev-apis.com/pets/none.jpg'],
     };
 
-    handleIndexClick = (event) => {
+    handleIndexClick = (event: MouseEvent<HTMLElement>): void => {
+        if (!(event.target instanceof HTMLElement)) {
+            return;
+        }
+
+        const eventIndex = event.target.dataset.index;
+
         this.setState({
             // + symbol is to convert this index from a string to number to match active's data type
-            active: +event.target.dataset.index
+            active: eventIndex ? +eventIndex : 0
         })
     }
 
-    render() {
+    render(): ReactNode {
         const { active } = this.state;
         const { images } = this.props;
 
@@ -33,7 +44,7 @@ class Carousel extends Component {
                                     src={photo}
                                     data-index={index}
                                     onClick={this.handleIndexClick}
-                                    className={ index === "active" ? "active" : "" }
+                                    className={ index === active ? "active" : "" }
                                     alt="animal thumbnail"
                                 />
                             );
