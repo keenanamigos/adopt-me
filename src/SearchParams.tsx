@@ -1,28 +1,30 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, FunctionComponent } from "react";
+import { RouteComponentProps } from "react-router";
+import { Animal, Pet, PetApiResponse } from "./ApiResponseTypes";
 import Results from "./Results";
 import ThemeContext from "./ThemeContext";
 import useBreedList from "./useBreedList";
 
-const ANIMALS = ['cat', 'dog', 'bird', 'reptile', 'rabbit'];
+const ANIMALS: Animal[] = ['cat', 'dog', 'bird', 'reptile', 'rabbit'];
 
-const SearchParams = () => {
+const SearchParams: FunctionComponent<RouteComponentProps> = () => {
     const [location, setLocation] = useState("Washington, DC");
-    const [animal, setAnimal] = useState("");
+    const [animal, setAnimal] = useState("" as Animal);
     const [breed, setBreed] = useState("");
-    const [pets, setPets] = useState([]);
+    const [pets, setPets] = useState([] as Pet[]);
     const [breeds] = useBreedList(animal);
     const [theme, setTheme] = useContext(ThemeContext);
 
     useEffect(() => {
-        requestPetData()
+        void requestPetData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    async function requestPetData() {
+    async function requestPetData(): Promise<void> {
         const requestUrl = `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`;
         const response = await fetch(requestUrl);
         // contains a pets property
-        const data = await response.json();
+        const data = (await response.json()) as PetApiResponse;
 
         setPets(data.pets);
     }
@@ -32,7 +34,7 @@ const SearchParams = () => {
             <form
                 onSubmit={event => {
                     event.preventDefault();
-                    requestPetData();
+                    void requestPetData();
                 }}
             >
                 <label htmlFor="location">
@@ -44,8 +46,8 @@ const SearchParams = () => {
                     <select
                         id="animal"
                         value={animal}
-                        onChange={event => setAnimal(event.target.value)}
-                        onBlur={event => setAnimal(event.target.value)}
+                        onChange={event => setAnimal(event.target.value as Animal)}
+                        onBlur={event => setAnimal(event.target.value as Animal)}
                     >
                         <option />
                         {
