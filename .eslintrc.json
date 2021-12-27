@@ -5,6 +5,7 @@
       "plugin:react/recommended",
       "plugin:jsx-a11y/recommended",
       "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/recommended-requiring-type-checking",
       "plugin:react-hooks/recommended",
       "prettier"
     ],
@@ -14,13 +15,14 @@
       "@typescript-eslint/no-empty-function": 0
     },
     "plugins": ["react", "import", "jsx-a11y", "@typescript-eslint"],
-    "parser": "@typescript/eslint-parser",
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaVersion": 2021,
       "sourceType": "module",
       "ecmaFeatures": {
         "jsx": true
-      }
+      },
+      "project": "./tsconfig.json"
     },
     "env": {
       "es6": true,
