@@ -24,7 +24,8 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "parcel": "^1.12.3",
-    "prettier": "^2.4.0"
+    "prettier": "^2.4.0",
+    "typescript": "^4.5.4"
   },
   "dependencies": {
     "react": "^17.0.1",
