@@ -1,6 +1,12 @@
+import { FunctionComponent } from "react";
 import Pet from "./Pet";
+import { Pet as PetType } from './ApiResponseTypes';
 
-const Results = ({ pets }) => {
+interface Props {
+    pets: PetType[];
+}
+
+const Results: FunctionComponent<Props> = ({ pets }) => {
     return (
         <div className="search">
             { !pets.length ? (
@@ -14,7 +20,7 @@ const Results = ({ pets }) => {
                         key={pet.id}
                         images={pet.images}
                         location={`${pet.city}, ${pet.state}`}
-                        id={pet.id}
+                        id={pet.id.toString()}
                     >
                     </Pet>
                 ))
