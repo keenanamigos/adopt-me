@@ -1,9 +1,7 @@
-import { StrictMode, useState } from 'react';
+import { StrictMode, lazy, Suspense, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
-import Details from './Details';
-import SearchParams from './SearchParams';
 import ThemeContext from './ThemeContext';
 
 // This is WITHOUT JSX
@@ -24,27 +22,32 @@ import ThemeContext from './ThemeContext';
 //   ]);
 // };
 
+const Details = lazy(() => import('./Details'));
+const SearchParams = lazy(() => import('./SearchParams'));
+
 const AdoptionApp = () => {
   const theme = useState('green')
 
   return (
     <ThemeContext.Provider value={theme}>
       <div>
-        <Router>
-          <header>
-            <Link to="/">
-              <h1>Adopt Me Please!</h1>
-            </Link>
-          </header>
-          <Switch>
-            <Route path="/details/:id">
-              <Details />
-            </Route>
-            <Route path="/">
-              <SearchParams />
-            </Route>
-          </Switch>
-        </Router>
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <Router>
+            <header>
+              <Link to="/">
+                <h1>Adopt Me Please!</h1>
+              </Link>
+            </header>
+            <Switch>
+              <Route path="/details/:id">
+                <Details />
+              </Route>
+              <Route path="/">
+                <SearchParams />
+              </Route>
+            </Switch>
+          </Router>
+        </Suspense>
       </div>
     </ThemeContext.Provider>
   );
