@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext, FunctionComponent } from "react";
-import { RouteComponentProps } from "react-router";
 import { Animal, Pet, PetApiResponse } from "./ApiResponseTypes";
 import Results from "./Results";
 import ThemeContext from "./ThemeContext";
@@ -7,7 +6,7 @@ import useBreedList from "./useBreedList";
 
 const ANIMALS: Animal[] = ['cat', 'dog', 'bird', 'reptile', 'rabbit'];
 
-const SearchParams: FunctionComponent<RouteComponentProps> = () => {
+const SearchParams: FunctionComponent = () => {
     const [location, setLocation] = useState("Washington, DC");
     const [animal, setAnimal] = useState("" as Animal);
     const [breed, setBreed] = useState("");
