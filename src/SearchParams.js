@@ -1,17 +1,17 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Results from "./Results";
-import ThemeContext from "./ThemeContext";
 import useBreedList from "./useBreedList";
 
 const ANIMALS = ['cat', 'dog', 'bird', 'reptile', 'rabbit'];
 
 const SearchParams = () => {
-    const [location, setLocation] = useState("Washington, DC");
-    const [animal, setAnimal] = useState("");
-    const [breed, setBreed] = useState("");
+    const animal = useSelector(state => state.animal);
+    const location = useSelector(state => state.location);
+    const breed = useSelector(state => state.breed);
+    const theme = useSelector(state => state.theme);
     const [pets, setPets] = useState([]);
     const [breeds] = useBreedList(animal);
-    const [theme, setTheme] = useContext(ThemeContext);
 
     useEffect(() => {
         requestPetData()
