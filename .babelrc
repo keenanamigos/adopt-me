@@ -1,25 +1,26 @@
 {
    "presets": [
-      [
-         "@babel/preset-react", {
-            "runtime": "automatic"
-         },
-         "@babel/preset-env"
-      ]
+     [
+       "@babel/preset-react",
+       {
+         "runtime": "automatic"
+       }
+     ],
+     "@babel/preset-env"
    ],
-   "plugins": [
-      "@babel/plugin-proposal-class-properties"
-   ],
+   "plugins": ["@babel/plugin-proposal-class-properties"],
    "env": {
-      "test": {
-         "presets": [
-            "@babel/preset-env",
-            {
-               "targets": {
-                  "node": "current"
-               }
-            }
+     "test": {
+       "presets": [
+         [
+           "@babel/preset-env",
+           {
+             "targets": {
+               "node": "current"
+             }
+           }
          ]
-      }
+       ]
+     }
    }
-}
+ }

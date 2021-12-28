@@ -28,7 +28,7 @@ const Pet = ({
   return (
     <Link to={`/details/${id}`} className="pet">
       <div className="image-container">
-        <img src={imageToShow} alt={name} />
+        <img data-testid="thumbnail" src={imageToShow} alt={name} />
       </div>
       <div className="info">
         <h1>{name}</h1>
