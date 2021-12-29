@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Results Component UI renders snapshot with no pets 1`] = `
+<div
+  className="search"
+>
+  <h2>
+    No pets were found.
+  </h2>
+</div>
+`;
