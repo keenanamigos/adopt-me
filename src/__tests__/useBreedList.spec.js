@@ -10,4 +10,27 @@ describe("useBreedList", () => {
         expect(breedList.length).toEqual(0);
         expect(status).toEqual("unloaded");
     });
+
+    test("gives back breeds with an animal", async () => {
+        const breeds = [
+            "Havanese",
+            "Poodle",
+            "Corgi",
+            "Husky"
+        ];
+
+        fetch.mockResponseOnce(JSON.stringify({
+            animal: "dog",
+            breeds
+        }));
+
+        const { result, waitForNextUpdate } = renderHook(() => useBreedList("dog"));
+
+        await waitForNextUpdate();
+
+        const [breedList, status] = result.current;
+
+        expect(status).toEqual("loaded");
+        expect(breedList).toEqual(breeds);
+    });
 });
